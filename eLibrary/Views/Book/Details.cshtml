@@ -1,0 +1,124 @@
+﻿@model eLibrary.Model.Book
+@{
+    ViewBag.Title = "Book Details";
+}
+
+<h4>ITEM DETAILS</h4>
+
+<fieldset>
+
+    <legend>@Model.ItemType, Authored by <b>@Model.Aurthors</b></legend>
+
+
+
+    <p>
+        <img src="@Url.Action("GetImage", "Book", new { id = Model.BookID })"  width="150" height="150" />
+    </p>
+    This<b> @Model.ItemType </b>can be found on Column <b>@ViewBag.Column </b>of row
+    <b>@ViewBag.Row </b>in Self Type <b>@ViewBag.Shelf </b>
+  
+   @if ((Model.QuantityInStoreIngnoreBorrow - Model.BookQuantity) > 0)
+   {
+    <p> <b>@Model.BookQuantity </b>  Copie(s) of this<b> @Model.ItemType </b> has been borrowed at the moment out of <b>@Model.QuantityInStoreIngnoreBorrow </b> Copies Bought to the Library </p>
+       
+          if ((Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperAdmin")) || (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin"))){
+              
+         <b>  @Html.ActionLink("Borrow Copy "+(Model.BookQuantity +1)  +" Now !", "Create", "BorrowedItem",  new { id = Model.BookID }, null)</b>
+          }
+          else{
+              <b>Go to the Library to PICK UP a copy Now!</b>
+              
+          }
+   }
+   else
+   {
+       <p>This<b> @Model.ItemType </b> is not Available in the Library, Earliest Availablity is on - <b> @String.Format("{0:ddd, MMM d, yyyy}", ViewBag.AvailableDate);</b>  </p>
+   }
+    <hr />
+
+    <div class="display-field">
+        <b>@Model.ItemType Title: </b>@Html.DisplayFor(model => model.ItemTitle)
+    </div>
+    @* <div class="editor-label">
+        @Html.LabelFor(model => model.CopiesAvailable)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CopiesAvailable)
+        @Html.ValidationMessageFor(model => model.CopiesAvailable)
+    </div>*@
+
+
+    <div class="editor-label">
+    </div>
+    <div class="editor-field">
+        <b>@Html.DisplayNameFor(model => model.SubjectArea):</b>  @Html.DisplayFor(model => model.SubjectArea)
+        @Html.ValidationMessageFor(model => model.SubjectArea)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.Aurthors):</b>  @Html.DisplayFor(model => model.Aurthors)
+    </div>
+
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.Publisher):</b>  @Html.DisplayFor(model => model.Publisher)
+    </div>
+
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.YearPublished):</b>  @Html.DisplayFor(model => model.YearPublished)
+    </div>
+
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.Edition):</b>  @Html.DisplayFor(model => model.Edition)
+    </div>
+
+
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ItemType):</b>  @Html.DisplayFor(model => model.ItemType)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.PageNumber):</b>  @Html.DisplayFor(model => model.PageNumber)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ISBN):</b>  @Html.DisplayFor(model => model.ISBN)
+    </div>
+
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ISBN13):</b>  @Html.DisplayFor(model => model.ISBN13)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.DiskNumbers):</b>  @Html.DisplayFor(model => model.DiskNumbers)
+    </div>
+    <br />
+    <hr />
+    <div class="display-field">
+        <b>@Model.ItemType Summary:</b>  @Html.DisplayFor(model => model.ItemSummary)
+    </div>
+
+    @* <div class="display-label">
+       
+    </div>
+    <div class="display-field">
+      <b> @Html.DisplayNameFor(model => model.ColumnID):</b>  @Html.DisplayFor(model => model.ColumnID)
+    </div>*@
+</fieldset>
+<p>
+   @* @Html.ActionLink("Edit", "Edit", new { id = Model.BookID }) 
+
+    <b>@ViewBag.Column </b>of row
+    <b>@ViewBag.Row </b>in Self Type <b>@ViewBag.Shelf </b>|*@
+    @Html.ActionLink("Back to List", "Index2", new {Rodid = ViewBag.RowID,Colid= ViewBag.ColID},null)
+</p>

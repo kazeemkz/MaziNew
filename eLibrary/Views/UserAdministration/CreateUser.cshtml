@@ -1,0 +1,203 @@
+﻿@model JobHustler.Models.CreateUserViewModel
+@{
+    ViewBag.Title = "Create New User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
+
+<h4 class="mvcMembership">CREATE NEW USER</h4>
+
+<div class="mvcMembership-account">
+    @using (Html.BeginForm("CreateUser", "UserAdministration"))
+    { 
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Create New User (If User is Created, UserName is:<b>  @ViewBag.UserName</b>)</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FirstName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LastName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserType)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.UserType, eLibrary.Model.LevelDictionary.StaffStudentList)
+                @Html.ValidationMessageFor(model => model.UserType)
+            </div>
+
+            @*  <div class="editor-label">
+                @Html.LabelFor(model => model.LevelType)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.LevelType, eLibrary.Model.LevelDictionary.LevelTypeList)
+                @Html.ValidationMessageFor(model => model.LevelType)
+            </div>*@
+
+          @*  <fieldset>
+                <legend><b>Please Fill-Out Section if Intented User is a Student</b></legend>
+
+                <div class="editor-label">
+                    <b>Student Class</b>
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.Level, eLibrary.Model.LevelDictionary.LevelDicoList)
+                    @Html.ValidationMessageFor(model => model.Level)
+                </div>
+
+                <div class="editor-label">
+                    <b>Arm</b>
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.LevelType, eLibrary.Model.LevelDictionary.LevelTypeList)
+                    @Html.ValidationMessageFor(model => model.LevelType)
+                </div>
+               
+
+            </fieldset>*@
+
+           @* <fieldset>
+                <legend><b>Please Fill-Out Section if Intented User is a Teacher</b></legend>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.LevelTaught)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.LevelTaught, eLibrary.Model.LevelDictionary.LevelDicoList)
+                    @Html.ValidationMessageFor(model => model.LevelTaught)
+                </div>
+                <div class="editor-label">
+                    <b>Arm</b>
+                </div>
+                <div class="editor-field">
+                   
+                    @Html.DropDownListFor(model => model.LevelTaughtType, eLibrary.Model.LevelDictionary.LevelTypeList)
+                    @Html.ValidationMessageFor(model => model.LevelTaughtType)
+                </div>
+            </fieldset>*@
+
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DOB)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DOB, new { @class = "date" })
+                @Html.ValidationMessageFor(model => model.DOB)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Telephone)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Telephone)
+                @Html.ValidationMessageFor(model => model.Telephone)
+            </div>
+
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.Username)
+            </div>*@
+            <b>If Created the UserName is:   @ViewBag.UserName</b>
+            <div class="editor-field">
+                @Html.HiddenFor(model => model.Username)
+                @Html.ValidationMessageFor(model => model.Username)
+
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ConfirmPassword)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Email)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            @* <p>
+            <input type="submit" value="Create" />
+        </p>*@
+        </fieldset>
+
+        if (Model.InitialRoles.Count > 0)
+        {
+        <fieldset>
+            <legend><b>Select Just ONE Role</b></legend>
+            <h3 class="mvcMembership">Initial Roles</h3>
+            @for (var i = 0; i < Model.InitialRoles.Count; i++)
+            {
+                var role = Model.InitialRoles.ElementAt(i);
+        
+                <div>
+                    @if (role.Key.Equals("SuperAdmin"))
+                    {
+                        if (User.IsInRole("SuperAdmin"))
+                        {
+                        <input name="InitialRoles[@i].Key" type="hidden" value="@role.Key" />
+                      
+                        <label>@Html.CheckBox("InitialRoles[" + i + "].Value", role.Value) @role.Key</label>
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        <input name="InitialRoles[@i].Key" type="hidden" value="@role.Key" />
+                      
+                        <label>@Html.CheckBox("InitialRoles[" + i + "].Value", role.Value) @role.Key</label>
+                    }
+                </div>
+            }
+        </fieldset>
+        }
+	 
+        <input type="submit" value="Create" />
+    }
+</div>
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            var theVal = '@ViewBag.UserName';
+            $("#Username").val(theVal);
+            // $('#chag_sort').val(sort2);
+            // alert($("#Username").val());
+
+            $("#DOB").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                //    dateFormat: 'mm/dd/yy',
+                gotoCurrent: true
+            });
+        });
+    </script>
+}

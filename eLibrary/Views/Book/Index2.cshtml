@@ -1,0 +1,130 @@
+﻿@model PagedList.IPagedList<eLibrary.Model.Book>
+@{
+    ViewBag.Title = "Index";
+    int theQuantity;
+}
+@helper Truncate(string input, int length)
+{
+    if (input.Length <= length)
+    { @input
+    }
+    else
+    { @input.Substring(0, length)<text>...</text>
+    }
+}
+<h4>ITEM LIST</h4>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<fieldset>
+    <legend><b>@ViewBag.BookCount</b> Item(s) Found on column <b>@ViewBag.Column</b> in
+        <b>@ViewBag.RowName</b>
+        of Shelf <b>@ViewBag.Self</b></legend>
+    <table>
+        <tr>
+            <th>
+                <b>Title</b>
+            </th>
+            <th>
+                <b>Author(s)</b>
+            </th>
+
+            <th>
+                <b>Type</b>
+            </th>
+            <th>
+                <b>Pages</b>
+            </th>
+            <th>
+                <b>Copies Ava.</b>
+
+            </th>
+            <th>
+                <b>Copies Bght</b>
+
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>*@
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemTitle)
+                </td>
+                <td>
+                    @Truncate(item.Aurthors, 15)
+                    @*   @Html.DisplayFor(modelItem => item.Aurthors)*@
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageNumber)
+                </td>
+
+
+                <td>
+                    @{
+            theQuantity = item.QuantityInStoreIngnoreBorrow - item.BookQuantity;
+             
+                    }
+                    <text>@theQuantity</text>
+                    @* @Html.DisplayFor(modelItem => item.BookQuantity)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityInStoreIngnoreBorrow)
+                </td>
+                @*  <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>*@
+
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
+                       @if ((Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperAdmin")) || (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin")))
+                       {
+                           @Html.ActionLink("Delete", "Delete", new { id = item.BookID }) <text>|</text>
+               @Html.ActionLink("Edit", "Edit", new { id = item.BookID , koko = 1}) 
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+        &nbsp;
+    @if (Model.HasPreviousPage)
+    {
+      //  Rodid=3&Colid=1
+        @Html.ActionLink("<<", "Index2", new { page = 1, Rodid =ViewBag.RowID, Colid = ViewBag.ColID, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink("< Prev", "Index2", new { page = Model.PageNumber - 1,Rodid =ViewBag.RowID, Colid = ViewBag.ColID, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw("&nbsp;");
+        @:< Prev
+    }
+        &nbsp;
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "Index2", new { page = Model.PageNumber + 1,Rodid =ViewBag.RowID, Colid = ViewBag.ColID, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink(">>", "Index2", new { page = Model.PageCount,Rodid =ViewBag.RowID, Colid = ViewBag.ColID, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw("&nbsp;")
+        @:>>
+    }
+    </div>
+</fieldset>

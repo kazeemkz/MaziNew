@@ -1,0 +1,24 @@
+﻿@model eLibrary.Model.Grade
+
+@{
+    ViewBag.Title = "Grade";
+}
+
+<h2>GRADE</h2>
+<b> User Name: @User.Identity.Name </b>
+<br />
+<b> Exam Name: @Model.Exam.ExamCode </b>
+    
+    <br />
+    
+  <b>  Total Questions: @Model.Exam.Questions.Count </b>
+    <br />
+   <b> Your Score:  @Model.Score  /  @Model.Exam.TotalPoints </b>
+    <br />  
+
+     @foreach (var question in Model.Exam.Questions)
+       { 
+    
+        Html.RenderPartial("__question",question);
+    
+     }

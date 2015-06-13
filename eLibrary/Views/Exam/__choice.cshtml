@@ -1,0 +1,18 @@
+﻿@model eLibrary.Model.Choice
+@if (Model.IsSelected && Model.IsAnswer)
+{ 
+
+    <div style="background-color: lightgreen">
+        @Html.RadioButton("Exam.Questions[" +( Model.Question.OrderNumber-1) + "].Choices[0].ChoiceID", Model.ChoiceID)
+        
+        @Model.Text
+    </div>
+}
+else
+{ 
+
+    @Html.RadioButton("Exam.Questions[" + (Model.Question.OrderNumber-1) + "].Choices[0].ChoiceID", Model.ChoiceID) 
+    @Model.Text 
+
+
+}

@@ -1,0 +1,143 @@
+@model PagedList.IPagedList<eLibrary.Model.LibraryUser>
+@{
+    ViewBag.Title = "User Administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="get" class="mvcMembership-searchForm">
+<fieldset>
+    <label>
+        User Type:
+               
+                      @Html.DropDownList("Type", eLibrary.Model.LevelDictionary.StaffStudentList)
+        <br />
+        Class:
+               
+                      @Html.DropDownList("Level", eLibrary.Model.LevelDictionary.LevelDicoList)
+        Arm:     @Html.DropDownList("Arm", eLibrary.Model.LevelDictionary.LevelTypeList)
+        <br />
+
+        @* Staff Class:
+               
+                      @Html.DropDownList("Level", eLibrary.Model.LevelDictionary.LevelDicoList)  Staff Arm:     @Html.DropDownList("Arm", eLibrary.Model.LevelDictionary.LevelTypeList)
+        <br />   
+                 *@
+        <br />
+
+        <input type="submit" value="Search" />
+    </label>
+</fieldset>
+</form>
+
+<fieldset>
+    <legend><b>@Model.Count()</b> Item(s) Found</legend>
+    <table>
+        <tr>
+            <th>
+                <b>Class Teacher</b>
+            </th>
+            <th>
+                <b>Teacher's Arm</b>
+            </th>
+
+            <th>
+                <b>Student Class</b>
+            </th>
+            <th>
+                <b>Student's Arm</b>
+            </th>
+            <th>
+                <b>Copies Ava.</b>
+
+            </th>
+            <th>
+                <b>Copies Bght</b>
+
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>*@
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td> @Html.DisplayFor(modelItem => item.)
+                <td>
+                    @Html.DisplayFor(modelItem => item.LevelTaught)
+                </td>
+                <td> @Html.DisplayFor(modelItem => item.LevelTaughtType)
+                  
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageNumber)
+                </td>
+
+
+                <td>
+                    @{
+            theQuantity = item.QuantityInStoreIngnoreBorrow - item.BookQuantity;
+             
+                    }
+                    <text>@theQuantity</text>
+                    @* @Html.DisplayFor(modelItem => item.BookQuantity)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityInStoreIngnoreBorrow)
+                </td>
+                @*  <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>*@
+
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
+
+                       @if ((Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperAdmin")) || (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin")))
+                       {
+                           @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) <text>|</text>
+                           @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+                       }
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+        &nbsp;
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw("&nbsp;");
+        @:< Prev
+    }
+        &nbsp;
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw("&nbsp;")
+        @:>>
+    }
+    </div>
+</fieldset>

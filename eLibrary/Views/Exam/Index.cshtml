@@ -1,0 +1,118 @@
+﻿@model eLibrary.Model.Exam
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("Index", "Exam"))
+{
+  
+   
+    @Html.DropDownList("ExamCode", new SelectList((System.Collections.IEnumerable)ViewData["ExamCodes"], "Value", "Text"))
+  
+
+    
+  
+
+    <input type="submit" value="Start Exam" id="button1" />
+    <div id="timer2"></div>
+    <h3>
+        <table class="timer">
+            <tr>
+                <td id="dCountDown"></td>
+                <td>Minute(s) Left</td>
+            </tr>
+        </table>
+    </h3>
+@*
+  <h3><p id="dCountDown"><text> Minutes Left</text> </p></h3>*@
+}
+@if (Model.Questions != null)
+{
+
+   
+    <h3>
+        <text>Exam Code </text>@Model.ExamCode</h3>
+    <br />
+     <h3>
+        <text>User-Name </text>@User.Identity.Name</h3>
+    <br />
+    @Html.Hidden("ExamID", Model.ExamID)
+
+
+
+using (Html.BeginForm("Grade", "Exam" , FormMethod.Post, new {id ="form"}))
+
+//  using (var form = Html.BeginForm(new { Action = "Grade" }))
+{
+    foreach (var question in Model.Questions)
+    {
+
+        Html.RenderPartial("__question", question);         
+     
+    <br />
+     
+    }    
+    <input type="submit" value="Submit" id="button" />
+       
+}
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" type="text/css" href="../../Content/jquery.countdown.css" />
+    <script type="text/javascript" src="../../Scripts/jquery.countdown.js"></script>
+    @* @Scripts.Render("~/bundles/jqueryCounter")*@
+    <script>
+      
+        $("#button").attr('disabled', 'disabled');
+        var countDownVal;// = //100;
+
+        $('input:radio').first().each(function () {
+
+            $("#button").removeAttr('disabled');
+
+
+        });
+
+        if ($("#button").is(':disabled') == false) {
+            $(window).bind('beforeunload', function () {
+
+                //save info somewhere
+
+                return 'are you sure you want to leave?';
+
+            });
+        }
+
+
+        if ($("#button").is(':disabled') == false) {
+
+
+            var theValue = $('#ExamID').val();
+
+            $.get('@Url.Action("LoadExamDuration","Exam")', { examID: theValue }, function (data) {
+                countDownVal = data;
+                $('#dCountDown').html(countDownVal);
+
+            });
+
+        }
+
+        if ($("#button").is(':disabled') == false) {
+            // var countDownVal = 12;
+            $('#dCountDown').html(countDownVal);
+            var timer1 = setInterval(function () { myTimer() }, 60000);
+            function myTimer() {
+                countDownVal--;
+                $('#dCountDown').html(countDownVal);
+                if (countDownVal == 0) {
+                    clearInterval(timer1);
+                    $(window).unbind('beforeunload');
+                    $("#form").submit();
+
+                };
+            };
+
+        }
+
+        //});
+    </script>
+}

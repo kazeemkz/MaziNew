@@ -1,0 +1,28 @@
+﻿@model eLibrary.Model.SubjectArea
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>DELETE SUBJECT AREA</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <h3>Are you sure you want to delete this Subject Area?</h3>
+    <fieldset>
+        <legend>SubjectArea</legend>
+
+        @Html.HiddenFor(model => model.SubjectAreaID)
+        <div class="display-label">
+        </div>
+        <div class="display-field">
+            <b>@Html.DisplayNameFor(model => model.TheSubjectArea):</b>  @Html.DisplayFor(model => model.TheSubjectArea)
+        </div>
+    </fieldset>
+
+    <p>
+        <input type="submit" value="Delete" />
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

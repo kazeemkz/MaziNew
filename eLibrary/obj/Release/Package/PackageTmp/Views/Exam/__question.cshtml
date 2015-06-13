@@ -1,0 +1,23 @@
+﻿@model eLibrary.Model.Question
+
+
+<fieldset>
+    <legend><b> <text>Question </text> @Model.OrderNumber [Mark Assigned =@Model.Point] </b></legend>
+<div class="question">
+   @Html.Hidden("Exam.Questions[" +((Model.OrderNumber)-1) + "].QuestionID", Model.QuestionID)
+    
+    @Model.Text
+  
+    <br />
+
+    @foreach (var choice in Model.Choices)
+    {
+
+        Html.RenderPartial("__choice", choice); <br />
+
+
+      
+    }
+</div>
+</fieldset>
+

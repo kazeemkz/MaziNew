@@ -1,0 +1,53 @@
+﻿@model eLibrary.Model.Row
+@{
+    ViewBag.Title = "Details";
+    int numberOfBooks = 0;
+}
+
+<h4>SHELF ROW DETAILS</h4>
+
+<fieldset>
+    <legend>Row <b>@Model.RowName</b> of Shelf <b>@Model.Self.ShelfName</b></legend>
+
+    @* <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShelfID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShelfID)
+    </div>*@
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.RowName):</b> @Html.DisplayFor(model => model.RowName)
+        @Html.ActionLink("Add a New Column", "Create", "Column", new { id = Model.RowID }, null)
+    </div>
+    <hr />
+    @foreach (eLibrary.Model.Column col in ViewBag.Column)
+    {
+        numberOfBooks = numberOfBooks + col.Book.Count;
+    }
+    @ViewBag.Column.Count  Column(s) is/are Available on row <b>@Model.RowName with a total
+        of @numberOfBooks Items registered on this Row</b>
+    <br />
+    <br />
+    @foreach (eLibrary.Model.Column col in ViewBag.Column)
+    {
+  
+  
+        @Html.ActionLink("Add Item to Column " + col.ColumnName, "Create", "Book", new { Rodid = Model.RowID, Colid = col.ColumnID }, null) 
+        @Html.ActionLink("View Items in Column " + col.ColumnName, "Index2", "Book", new { Rodid = Model.RowID, Colid = col.ColumnID }, null)
+        @Html.ActionLink("Delete Column " + col.ColumnName, "Delete", "Column", new { id = col.ColumnID }, null)
+      <b> @col.Book.Count()<text> Item(s) on this column</text></b> 
+        <br />
+     
+    }
+    @* @Html.ActionLink(col.ColumnName, "Details", "Row", new { id = col.ColumnID }, null) 
+        *@<br />
+
+
+</fieldset>
+<p>
+   @* @Html.ActionLink("Edit", "Edit", new { id = Model.RowID }) |*@
+    @Html.ActionLink("Back to List", "Index", "Shelf")
+</p>

@@ -1,0 +1,82 @@
+﻿@model eLibrary.Model.BorrowedItem
+@{
+    ViewBag.Title = "Create";
+}
+
+<h4>Borrow an Item</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Borrowed an Item from Library</legend>
+        <p>Item Title:<b> @ViewBag.Tittle</b></p>
+        <p>Author(s):<b> @ViewBag.Authors</b></p>
+        <p>Subject Area:<b> @ViewBag.SubjectArea</b></p>
+       <hr />
+
+        @*<div class="editor-label">
+            ViewBag.Title = theBook.ItemTitle;
+           ViewBag.Authors = theBook.Aurthors;
+           ViewBag.SubjectArea = theBook.SubjectArea;
+            @Html.LabelFor(model => model.BookID)
+        </div>*@
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.BookID)
+            @Html.ValidationMessageFor(model => model.BookID)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserID)
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>
+
+       @*  <div class="editor-label">
+            @Html.LabelFor(model => model.UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserID)
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>*@
+
+        @* <div class="editor-label">
+            @Html.LabelFor(model => model.TimeBorrowed)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TimeBorrowed)
+            @Html.ValidationMessageFor(model => model.TimeBorrowed)
+        </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeToBeReturned)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TimeToBeReturned)
+            @Html.ValidationMessageFor(model => model.TimeToBeReturned)
+        </div>
+
+        <p>
+            <input type="submit" value="Borrow this Item" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+
+    //$("#TimeToBeReturned").datepicker({
+    //    changeMonth: true,
+    //    changeYear: true,
+    //    dateFormat: 'mm/dd/yy',
+    //    gotoCurrent: true
+    //});
+</script>
+}

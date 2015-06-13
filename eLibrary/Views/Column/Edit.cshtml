@@ -1,0 +1,45 @@
+﻿@model eLibrary.Model.Column
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Column</legend>
+
+        @Html.HiddenFor(model => model.ColumnID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ColumnName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ColumnName)
+            @Html.ValidationMessageFor(model => model.ColumnName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RowID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RowID)
+            @Html.ValidationMessageFor(model => model.RowID)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

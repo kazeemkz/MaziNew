@@ -1,0 +1,33 @@
+﻿@model IEnumerable<eLibrary.Model.SubjectArea>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>SUBJECT AREAS</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TheSubjectArea)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TheSubjectArea)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SubjectAreaID }) |
+        @*    @Html.ActionLink("Details", "Details", new { id=item.SubjectAreaID }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.SubjectAreaID })
+        </td>
+    </tr>
+}
+
+</table>

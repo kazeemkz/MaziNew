@@ -1,0 +1,84 @@
+﻿@model eLibrary.Model.LibraryUser
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>USER DETAILS</h4>
+
+<fieldset>
+    <legend>Library User of type <b>@Model.UserType</b></legend>
+
+    <p>
+        <img src="@Url.Action("GetImage", "LibraryUser", new { id = Model.LibraryUserID })" />
+    </p>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.FirstName):</b>  @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.LastName):</b> @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.UserType):</b> @Html.DisplayFor(model => model.UserType)
+    </div>
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.UserName):</b> @Html.DisplayFor(model => model.UserName)
+    </div>
+
+
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>Phone Number:</b> @Html.DisplayFor(model => model.TelePhoneNumber)
+    </div>
+    <div class="display-label">
+    </div>
+   @* <div class="display-field">
+        <b>Class:</b>  @Html.DisplayFor(model => model.Level)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>Arm:</b>  @Html.DisplayFor(model => model.LevelType)
+    </div>*@
+
+   @* <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ClassTeacher):</b> @Html.DisplayFor(model => model.ClassTeacher)
+    </div>*@
+
+    <div class="display-label">
+    </div>
+    @*<div class="display-field">
+        <b>Class Teacher of:</b>  @Html.DisplayFor(model => model.LevelTaught)
+    </div>
+
+    <div class="display-label">
+       
+    </div>
+    <div class="display-field">
+     <b> Arm:</b>   @Html.DisplayFor(model => model.LevelTaughtType)
+    </div>*@
+
+    <div class="display-label">
+      
+    </div>
+    <div class="display-field">
+      <b>  @Html.DisplayNameFor(model => model.DOB)</b>  @{string theDate1 = String.Format("{0:dddd, MMMM dd, yyyy}", Model.DOB);}@theDate1  @*@Html.DisplayFor(model => model.DOB)*@
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserName })
+    @Html.ActionLink("Back to List", "Index")
+</p>

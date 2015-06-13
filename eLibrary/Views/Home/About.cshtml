@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "The E-library Solution";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+    <p>
+      The E-library Solution provides a repository where teachers can upload lecture materials, electronic text books for the benefit of students.
+    </p>
+
+    <p>
+       It provides a platform where teachers can test students skills in a particular subject via the online capability of the E-library Solution.
+    </p>
+
+    <p>
+      It also provides an avenue where students can research.
+    </p>
+      <p>
+      Lastly, the system also provides an avenue where students can take assesment tests.
+    </p>
+</article>
+
+<aside>
+    <h3>Go to Home or Contact</h3>
+    <p>
+      The E-library Solution
+    </p>
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    </ul>
+</aside>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<eLibrary.Model.Course>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>CLASS SUBJECTS</h4>
+<br />
+<br />
+
+@using (Html.BeginForm("Index", "Course"))
+{
+    @Html.ValidationSummary(true)
+
+    
+    <div class="editor-field">
+        @Html.DropDownList("level", eLibrary.Model.LevelDictionary.LevelDicoList)
+    </div>
+    
+    <br /> 
+    <input type="submit" value="View Class Subjects" id="button3" />
+  
+
+}
+
+<p>
+    @Html.ActionLink("Create New Class Subject", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+          @*  @Html.HiddenFor(model => model)
+              @Html.HiddenFor(model => model.LevelID)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+        <tr>
+            <td>
+              @*  @Html.DisplayFor(modelItem => item.Level.Name)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID, levelID = item.LevelID }) |
+        @*    @Html.ActionLink("Details", "Details", new { id = item.CourseID,levelID = item.LevelID  }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id = item.CourseID,levelID = item.LevelID  })
+            </td>
+        </tr>
+        }
+    }
+</table>

@@ -1,0 +1,161 @@
+﻿@model eLibrary.Model.Book
+@{
+    ViewBag.Title = "Create an Item";
+}
+
+<h4>CREATE AN ITEM IN A SHELF</h4>
+
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Create an Item in Column<b> @ViewBag.Column</b>  of Row -<b> @ViewBag.RowName</b>
+            Belonging to Shelf <b>@ViewBag.Self </b></legend>
+
+        @*
+        <input type="file" name="file" />*@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemTitle)
+            @Html.ValidationMessageFor(model => model.ItemTitle)
+        </div>
+
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.ColumnID)
+            @Html.ValidationMessageFor(model => model.ItemTitle)
+        </div>
+
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Aurthors)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Aurthors)
+            @Html.ValidationMessageFor(model => model.Aurthors)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Publisher)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Publisher)
+            @Html.ValidationMessageFor(model => model.Publisher)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Edition)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Edition)
+            @Html.ValidationMessageFor(model => model.Edition)
+        </div>
+
+
+        <hr />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.QuantityInStoreIngnoreBorrow)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.QuantityInStoreIngnoreBorrow)
+            @Html.ValidationMessageFor(model => model.QuantityInStoreIngnoreBorrow)
+        </div>
+        <div class="editor-label">
+         <p>   @Html.LabelFor(model => model.SubjectArea)    </p>
+        </div>
+
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.SubjectArea, new SelectList((System.Collections.IEnumerable)ViewBag.Subjects, "Value", "Text"))
+           @*  @Html.EditorFor(model => model.SubjectArea.TheSubjectArea)*@ @Html.ActionLink("Create Subject Area", "Create", "SubjectArea")
+            @Html.ValidationMessageFor(model => model.SubjectArea)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.YearPublished)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.YearPublished)
+            @Html.ValidationMessageFor(model => model.YearPublished)
+        </div>
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ItemType, eLibrary.Model.LevelDictionary.ItemDicoList)
+            @Html.ValidationMessageFor(model => model.ItemType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PageNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PageNumber)
+            @Html.ValidationMessageFor(model => model.PageNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DiskNumbers)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DiskNumbers)
+            @Html.ValidationMessageFor(model => model.DiskNumbers)
+        </div>
+        <hr />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ISBN)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ISBN)
+            @Html.ValidationMessageFor(model => model.ISBN)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ISBN13)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ISBN13)
+            @Html.ValidationMessageFor(model => model.ISBN13)
+        </div>
+
+        <hr />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemSummary)
+        </div>
+
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.ItemSummary)
+            @Html.ValidationMessageFor(model => model.ItemSummary)
+        </div>
+
+
+
+        @* <div class="editor-label">
+            @Html.LabelFor(model => model.ColumnID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ColumnID)
+            @Html.ValidationMessageFor(model => model.ColumnID)
+        </div>*@
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

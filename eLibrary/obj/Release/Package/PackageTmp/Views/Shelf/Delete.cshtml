@@ -1,0 +1,29 @@
+﻿@model eLibrary.Model.Shelf
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h4>DELETE A SHELF</h4>
+
+<h3>Are you sure you want to delete this?</h3>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Shelf Delete</legend>
+
+
+        @Html.HiddenFor(model => model.ShelfID)
+        <div class="display-label">
+          
+        </div>
+        <div class="display-field">
+         <b>  @Html.DisplayNameFor(model => model.ShelfName):</b>   @Html.DisplayFor(model => model.ShelfName)
+        </div>
+    </fieldset>
+
+    <p>
+        <input type="submit" value="Delete" />
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

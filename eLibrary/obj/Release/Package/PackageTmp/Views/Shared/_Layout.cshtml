@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - E-Library Solution</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("The E-Library Solution", "Index", "Home")
+                </p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#tab2">Home</a></li>
+                            @if (!(Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Student")))
+                            {
+                               
+                                <li><a href="#tab1">Uploads</a></li>
+
+                                                       
+                                <li><a href="#tab5">Study</a></li>
+                                
+@*<li><a href="#tab6">Library Mangt.</a></li>*@
+                                <li><a href="#tab7">Subjects</a></li>
+                                
+                                
+                            }
+                            @if ((Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperAdmin")) || (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin")))
+                            {
+
+                                <li><a href="#tab3">Admin</a></li>
+                            }
+                            @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Student"))
+                            {
+                                <li><a href="#tab4">Student Study</a></li>
+                            }
+                        </ul>
+
+                        <div id="tab2">@Html.ActionLink("Home", "Index", "Home")| @Html.ActionLink("About", "About", "Home")|
+                            @Html.ActionLink("Contact", "Contact", "Home")
+                        </div>
+
+                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Student"))
+                        {
+                            
+                          
+                            <div id="tab4">@Html.ActionLink("Study Material", "Index", "ReadContent")| @Html.ActionLink("Exam Study", "Index", "Exam")
+                                |  @*  @Html.ActionLink("Library Item(s)", "Index", "Book")*@
+                            </div>
+                            
+                        }
+                        else
+                        {
+                            <div id="tab1">@Html.ActionLink("Chapters", "Create", "UploadLessonNote")| @Html.ActionLink("Texbooks", "Create", "UploadTextBook")|
+                                @Html.ActionLink("Additional Chapters", "Create", "UploadAdditionalChapterMaterial")|
+                                @Html.ActionLink("Delete", "Index", "Chapter")
+                            </div>
+                           
+                           
+                            <div id="tab5">
+                                @Html.ActionLink("Exams", "LoadExamCodes", "Exam")|
+                                @Html.ActionLink("Study Material(Student View)", "Index", "ReadContent")
+                            </div>@*
+                            
+                            <div id="tab6">
+                                @Html.ActionLink("Shelf", "Index", "Shelf")|
+
+                                 @if (!(Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperAdmin")) || (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin")))
+                                 {
+                                     @Html.ActionLink("Borrowed Items", "Index2", "BorrowedItem")<text>|</text>
+                                 }
+                                @if ((Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperAdmin")) || (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin")))
+                                {
+                                    @Html.ActionLink("Borrowed Items", "Index", "BorrowedItem")<text>|</text>
+                                }
+                                @Html.ActionLink("Find Item(s)", "Index", "Book")|
+                                  @Html.ActionLink("Add Item(s)", "Create2", "Book")
+                            </div>*@
+                           
+                            <div id="tab7">@Html.ActionLink("Subjects", "Index", "Course")
+                            </div>
+                            
+                        }
+                        @if ((Request.IsAuthenticated && HttpContext.Current.User.IsInRole("SuperAdmin")) || (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin")))
+                        {
+                            <div id="tab3">@Html.ActionLink("Administration", "Index", "UserAdministration")|
+                                @Html.ActionLink("Create User", "CreateUser", "UserAdministration")
+                            </div>
+                        }
+@*   <div id="tab4">@Html.ActionLink("Study Material", "Index", "ReadContent")| @Html.ActionLink("Exam Study", "Index", "Exam")
+                            |   @Html.ActionLink("Library Item(s)", "Index", "Book")
+                        </div>*@
+                    </div>
+                    @*   <ul id="menu">
+                        <li>@Html.ActionLink("Upload Notes", "Create", "UploadLessonNote")</li>
+                        
+                        <li></li>
+                        <li</li>
+                    </ul>*@
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - MyStreams.com and Telewest</p>
+            </div>
+            <div class="float-right">
+                <ul id="social">
+                    <li><a href="http://facebook.com" class="facebook">Facebook</a></li>
+                    <li><a href="http://twitter.com" class="twitter">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Content/themes/base/css")
+    @RenderSection("scripts", required: false)
+    <style type="text/css">
+        li.ui-state-default {
+            font-size: 10px;
+        }
+
+        div.ui-tabs-panel {
+            font-size: 15px;
+            font-family: georgia;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        $(":submit").button();
+        //$("#tabs").tabs().width("550px");
+        $("#tabs").tabs().width("400px");
+    </script>
+
+
+</body>
+</html>

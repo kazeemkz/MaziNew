@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<eLibrary.Model.BorrowedItem>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>LIST OF YOUR BORROWED BOOKS</h4>
+
+<p>
+    @* @Html.ActionLink("Create New", "Create")*@
+</p>
+
+<table>
+    <tr>
+        <th>
+            <b>Item Name</b>
+        </th>
+        <th>
+            <b>Item Type</b>
+        </th>
+        <th>
+            <b>ISBN/ISBN13</b>
+        </th>
+        <th>
+            <b>Borrowed By</b>
+        </th>
+        <th>
+            <b>Time Borrowed</b>
+        </th>
+        <th>
+            <b>Time To Be Returned</b>
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @{
+        string theDate1 = String.Format("{0:ddd, MMM d, yyyy h:mm:ss tt}", item.TimeBorrowed); 
+                }
+                <b>@theDate1</b>
+                @* @Html.DisplayFor(modelItem => item.TimeBorrowed)*@
+            </td>
+            <td>
+                @{
+        string theDate = String.Format("{0:ddd, MMM d, yyyy}", item.TimeToBeReturned); 
+                }
+                <b>@theDate</b>
+                @*    @Html.DisplayFor(modelItem => item.TimeToBeReturned)*@
+            </td>
+            <td>@*   @Html.ActionLink("Edit", "Edit", new { id = item.BorrowedItemID })*@
+ 
+             @*   @Html.ActionLink("Details", "Details", new { id = item.BorrowedItemID })*@
+                @*   @Html.ActionLink("Delete", "Delete", new { id = item.BorrowedItemID })*@
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+    &nbsp;
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw("&nbsp;");
+        @:< Prev
+    }
+    &nbsp;
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw("&nbsp;")
+        @:>>
+    }
+</div>
+

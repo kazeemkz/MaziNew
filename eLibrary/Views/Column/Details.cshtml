@@ -1,0 +1,29 @@
+﻿@model eLibrary.Model.Column
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Column</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ColumnName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ColumnName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RowID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RowID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ColumnID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

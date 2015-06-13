@@ -1,0 +1,107 @@
+﻿@model IEnumerable<eLibrary.Model.Finance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>*@
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+@using (Html.BeginForm("Index", "Finance"))
+{
+    <h3>VIEW RECORD</h3>
+    <fieldset>
+        <legend>Search Box</legend>
+        <table>
+
+            <tr>
+                <td>Date From:</td>
+                <td>@Html.TextBox("date") </td>
+
+            </tr>
+            <tr>
+                <td>Date To:</td>
+                <td>@Html.TextBox("dateto") </td>
+
+            </tr>
+
+            @* <tr>
+                    <td>Class: </td> <td> @Html.DropDownList("arm", new SelectList((System.Collections.IEnumerable)ViewData["arm"], "Value", "Text"))</td>
+                </tr>*@
+
+            <tr>
+                <td>Student/Staff ID:</td>
+                <td>@Html.TextBox("studentid") </td>
+
+            </tr>
+           
+    </table>
+
+    <input type="submit" value="Search" id="search" />
+</fieldset>
+}
+
+<h3> @ViewBag.Count record(s) found with total amount: - # @ViewBag.Amount</h3>
+<br />
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePaid)
+        </th>
+
+        <th>
+           # @Html.DisplayNameFor(model => model.AmountPaid)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaidBy)
+        </td>
+        <td>
+         
+            @{
+    string theDate1 = String.Format("{0:ddd, MMM d, yyyy h:mm:ss tt}", item.DatePaid);
+            }
+            <b>@theDate1</b>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountPaid)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FinanceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FinanceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FinanceID })
+        </td>*@
+    </tr>
+}
+
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        $("#date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'mm/dd/yy',
+            gotoCurrent: true
+        });
+
+        $("#dateto").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'mm/dd/yy',
+            gotoCurrent: true
+        });
+
+
+    </script>
+}

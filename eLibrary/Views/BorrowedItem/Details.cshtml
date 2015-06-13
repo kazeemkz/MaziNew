@@ -1,0 +1,70 @@
+﻿@model eLibrary.Model.BorrowedItem
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Borrowed Item</h4>
+
+<fieldset>
+    <legend>Borrowed Item by <b>@Model.UserID</b></legend>
+
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.BookID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BookID)
+    </div>*@
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ItemName):</b>   @Html.DisplayFor(model => model.ItemName)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ISBN):</b>   @Html.DisplayFor(model => model.ISBN)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ItemType):</b>  @Html.DisplayFor(model => model.ItemType)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.UserID):</b>   @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.TimeBorrowed):</b>
+        @{string theDate1 = String.Format("{0:dddd, MMMM dd, yyyy h:mm:ss tt}", Model.TimeBorrowed);}@theDate1
+        @* @Html.DisplayFor(model => model.TimeBorrowed)*@
+    </div>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.TimeToBeReturned):</b>
+        @{string theDate2 = String.Format("{0:dddd, MMMM dd, yyyy}", Model.TimeToBeReturned);}@theDate2
+        @* @Html.DisplayFor(model => model.TimeToBeReturned)*@
+    </div>
+    <hr />
+    @* @Ajax.ActionLink("Return Item to Library Now!", "ReturnBook","BorrowedItem", new { id = Model.BookID }, new AjaxOptions { HttpMethod = "POST", OnSuccess='@Url.Action("LoadExamDuration","OnlineExam")'})*@
+   <h3>Amount owing - # @ViewBag.Amount</h3>
+    <br />
+    @using (Html.BeginForm("ReturnBook", "BorrowedItem",  new { id = Model.BookID, id2 = Model.BorrowedItemID},FormMethod.Post))
+    {
+       <input type="submit" value="Return Item to Library Now!" />
+       @* @Html.ActionLink("Return Item to Library Now!", "ReturnBook", "BorrowedItem", new { id = Model.BookID }, null)*@
+    }
+</fieldset>
+<p>
+    @*  @Html.ActionLink("Edit", "Edit", new { id=Model.BorrowedItemID }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

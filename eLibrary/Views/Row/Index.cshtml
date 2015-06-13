@@ -1,0 +1,39 @@
+﻿@model IEnumerable<eLibrary.Model.Row>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>VIEW ROWS</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+       @* <th>
+            @Html.DisplayNameFor(model => model.ShelfID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.RowName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       @* <td>
+            @Html.DisplayFor(modelItem => item.ShelfID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.RowName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RowID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RowID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RowID })
+        </td>
+    </tr>
+}
+
+</table>

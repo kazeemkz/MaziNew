@@ -1,0 +1,61 @@
+﻿@model eLibrary.Model.Course
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h4>EDIT CLASS SUBJECT</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Subject</legend>
+
+        @Html.HiddenFor(model => model.CourseID)
+        @*  <div class="editor-label">
+            @Html.LabelFor(model => model.LevelStringID)
+        </div>*@
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.LevelStringID)
+       @*   //  @Html.HiddenFor(model => model.Level)*@
+            @Html.ValidationMessageFor(model => model.LevelStringID)
+        </div>
+
+        @* <div class="editor-label">
+            @Html.LabelFor(model => model.LevelID)
+        </div>*@
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.LevelID)
+            @*   @Html.ValidationMessageFor(model => model.LevelID)*@
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        @* <div class="editor-label">
+            @Html.LabelFor(model => model.path)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.path)
+            @Html.ValidationMessageFor(model => model.path)
+        </div>
+*@
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

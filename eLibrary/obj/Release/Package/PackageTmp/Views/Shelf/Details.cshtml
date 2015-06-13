@@ -1,0 +1,30 @@
+﻿@model eLibrary.Model.Shelf
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>SHELF DETAILS</h4>
+
+<fieldset>
+    <legend><b>@Model.ShelfName</b> Shelf</legend>
+
+    <div class="display-label">
+    </div>
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ShelfName):</b>   @Html.DisplayFor(model => model.ShelfName)   @Html.ActionLink("Add a New Row", "Create", "Row",new { id = Model.ShelfID }, null)
+    </div>
+
+    <hr />
+   @ViewBag.Rows.Count Row(s) Available on Shelf- <b> @Model.ShelfName </b> 
+    <br />
+    @foreach (eLibrary.Model.Row role in ViewBag.Rows)
+    {
+      @Html.ActionLink("View Row "+role.RowName, "Details", "Row",new { id = role.RowID }, null)  @Html.ActionLink("Delete Row "+ role.RowName, "Delete", "Row",new { id = role.RowID }, null)
+        <br />
+        
+    }
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShelfID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

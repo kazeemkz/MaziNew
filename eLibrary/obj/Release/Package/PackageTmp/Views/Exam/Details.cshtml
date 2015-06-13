@@ -1,0 +1,49 @@
+﻿@model eLibrary.Model.Exam
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4> Exam Details </h4>
+
+<fieldset>
+    <legend>@Model.ExamCode</legend>
+
+
+    <div class="display-field">
+        <b>@Html.DisplayNameFor(model => model.ExamCode):</b>  @Html.DisplayFor(model => model.ExamCode)
+    </div>
+
+
+    <div class="display-field">
+        <b>Class:</b>  @Html.DisplayFor(model => model.LevelName)
+    </div>
+
+     <div class="display-field">
+        <b>Exam Duration(Mins):</b>  @Html.DisplayFor(model => model.Duration)
+    </div>
+
+    <div class="display-label">
+       
+    </div>
+    <div class="display-field">
+      <b> @Html.DisplayNameFor(model => model.Term):</b>  @Html.DisplayFor(model => model.Term)
+    </div>
+
+    <div class="display-label">
+       
+    </div>
+    <div class="display-field">
+      <b> @Html.DisplayNameFor(model => model.Visible):</b>  @Html.DisplayFor(model => model.Visible)
+    </div>
+
+    <div class="display-label">
+      
+    </div>
+   @* <div class="display-field">
+       <b>  @Html.DisplayNameFor(model => model.TotalPoints):</b> @Html.DisplayFor(model => model.TotalPoints)
+    </div>*@
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExamID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

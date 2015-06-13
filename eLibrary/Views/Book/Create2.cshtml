@@ -1,0 +1,307 @@
+﻿@model eLibrary.Model.Book
+@{
+    ViewBag.Title = "Create an Item";
+}
+
+<h4>CREATE AN ITEM IN A SHELF</h4>
+
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("Create2", "Book", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Create an Item on a Shelf</legend>
+
+        <fieldset>
+            <legend>Choose Item Location First</legend>
+
+            <div class="editor-label">
+              @*  @Html.LabelFor(model => model.Column.Row.Self.ShelfName)*@
+                <b>Shelf</b>
+            </div>
+
+            <div class="editor-field">
+                @*  @Html.EditorFor(model => model.SubjectArea)*@
+                @Html.DropDownList("ShelfName", new SelectList((System.Collections.IEnumerable)ViewBag.Shelf, "Value", "Text"))
+             @*   @Html.ValidationMessageFor(model => model.Column.Row.Self.ShelfName)*@
+            </div>
+
+
+            <div class="editor-label">
+                <b>Row Name</b>
+             @*  @Html.LabelFor(model => model.Column.Row.RowName)*@
+            </div>
+
+            <div class="editor-field">
+                @Html.DropDownList("RowName", new SelectList(Enumerable.Empty<SelectListItem>()))
+              @*  @Html.ValidationMessageFor(model => model.Column.Row.RowName)*@
+            </div>
+
+            <div class="editor-label">
+                <b>Column Name</b>
+              @*  @Html.LabelFor(model => model.Column.ColumnName)*@
+            </div>
+
+            <div class="editor-field">
+                @Html.DropDownList("ColumnName", new SelectList(Enumerable.Empty<SelectListItem>()))
+               @* @Html.ValidationMessageFor(model => model.Column.ColumnName)*@
+            </div>
+            <hr />
+
+
+        </fieldset>
+
+        @*
+        <input type="file" name="file" />*@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemTitle)
+            @Html.ValidationMessageFor(model => model.ItemTitle)
+        </div>
+
+        <div class="editor-field">
+           @* @Html.HiddenFor(model => model.ColumnID)*@
+            @Html.ValidationMessageFor(model => model.ItemTitle)
+        </div>
+
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Aurthors)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Aurthors)
+            @Html.ValidationMessageFor(model => model.Aurthors)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Publisher)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Publisher)
+            @Html.ValidationMessageFor(model => model.Publisher)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Edition)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Edition)
+            @Html.ValidationMessageFor(model => model.Edition)
+        </div>
+
+
+        <hr />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.QuantityInStoreIngnoreBorrow)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.QuantityInStoreIngnoreBorrow)
+            @Html.ValidationMessageFor(model => model.QuantityInStoreIngnoreBorrow)
+        </div>
+        <div class="editor-label">
+            <p>@Html.LabelFor(model => model.SubjectArea)    </p>
+        </div>
+
+       
+
+       <div class="editor-field">
+            @Html.DropDownListFor(model => model.SubjectArea, new SelectList((System.Collections.IEnumerable)ViewBag.Subjects, "Value", "Text"))
+            @Html.ActionLink("Create Subject Area", "Create", "SubjectArea")
+            @Html.ValidationMessageFor(model => model.SubjectArea)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.YearPublished)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.YearPublished)
+            @Html.ValidationMessageFor(model => model.YearPublished)
+        </div>
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ItemType, eLibrary.Model.LevelDictionary.ItemDicoList)
+            @Html.ValidationMessageFor(model => model.ItemType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PageNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PageNumber)
+            @Html.ValidationMessageFor(model => model.PageNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DiskNumbers)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DiskNumbers)
+            @Html.ValidationMessageFor(model => model.DiskNumbers)
+        </div>
+        <hr />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ISBN)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ISBN)
+            @Html.ValidationMessageFor(model => model.ISBN)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ISBN13)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ISBN13)
+            @Html.ValidationMessageFor(model => model.ISBN13)
+        </div>
+
+        <hr />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemSummary)
+        </div>
+
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.ItemSummary)
+            @Html.ValidationMessageFor(model => model.ItemSummary)
+        </div>
+
+
+
+        @* <div class="editor-label">
+            @Html.LabelFor(model => model.ColumnID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ColumnID)
+            @Html.ValidationMessageFor(model => model.ColumnID)
+        </div>*@
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        var shelfRow;
+        //  alert($("#Column_Row_Self_ShelfName").val()); //RowName //ColumnName   //Column_Row_RowName  Column_ColumnName
+        var shelfName = $("#ShelfName").val();
+        var bookID = $("#BookID").val();
+        var theValue = shelfName + ":" + bookID;
+
+        //load course based on jss1 value first
+        $.get('@Url.Action("LoadShelfRowDefault","Book")', { shelf: theValue }, function (data) {
+            var ddl = $("#RowName");
+            ddl.empty();
+            shelfRow = data[0].Value + ":" + shelfName + ":" + bookID;
+            // alert(shelfRow);
+            //ddl.append("<option value='" + "" + "'>"
+            //       + "Choose...." + "</option>");
+            for (var i = 0; i < data.length; i++) {
+                ddl.append("<option value='" + data[i].Value + "'>"
+                     + data[i].Text + "</option>");
+            }
+
+
+
+            $.get('@Url.Action("LoadfRowColumsDefault","Book")', { theShelfRows: shelfRow }, function (data) {
+                var ddl2 = $("#ColumnName");
+                ddl2.empty();
+                //alert(data[0].Value);
+                //ddl.append("<option value='" + "" + "'>"
+                //       + "Choose...." + "</option>");
+                for (var i = 0; i < data.length; i++) {
+                    ddl2.append("<option value='" + data[i].Value + "'>"
+                         + data[i].Text + "</option>");
+                }
+
+            });
+
+
+        });
+
+        $("#RowName").change(function () {
+
+            var shelfName = $("#RowName").val() + ":" + $("#ShelfName").val();
+            //   alert(shelfName);
+            $.get('@Url.Action("LoadfRowColums","Book")', { theShelfRows: shelfName }, function (data) {
+                var ddl2 = $("#ColumnName");
+                ddl2.empty();
+                //alert(data[0].Value);
+                //ddl.append("<option value='" + "" + "'>"
+                //       + "Choose...." + "</option>");
+                for (var i = 0; i < data.length; i++) {
+                    ddl2.append("<option value='" + data[i].Value + "'>"
+                         + data[i].Text + "</option>");
+                }
+
+            });
+
+
+        });
+
+        $("#ShelfName").change(function () {
+
+            var shelfRow1;
+            // alert($("#Column_Row_Self_ShelfName").val()); //RowName //ColumnName
+            var shelfName = $("#ShelfName").val();
+            //load course based on jss1 value first
+            $.get('@Url.Action("LoadShelfRow","Book")', { shelf: shelfName }, function (data) {
+                // alert(data[0].Value);
+                //if (data == "") {
+                //    aler("Empty")
+                //}
+                var ddl = $("#RowName");
+                ddl.empty();
+
+                shelfRow1 = data[0].Value + ":" + shelfName;
+
+
+                // alert(shelfRow);
+                //ddl.append("<option value='" + "" + "'>"
+                //       + "Choose...." + "</option>");
+                for (var i = 0; i < data.length; i++) {
+                    ddl.append("<option value='" + data[i].Value + "'>"
+                         + data[i].Text + "</option>");
+                }
+
+
+
+                $.get('@Url.Action("LoadfRowColums","Book")', { theShelfRows: shelfRow1 }, function (data) {
+                    var ddl2 = $("#ColumnName");
+                    ddl2.empty();
+                    //alert(data[0].Value);
+                    //ddl.append("<option value='" + "" + "'>"
+                    //       + "Choose...." + "</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        ddl2.append("<option value='" + data[i].Value + "'>"
+                             + data[i].Text + "</option>");
+                    }
+
+                });
+
+
+            });
+        });
+
+
+
+    </script>
+}

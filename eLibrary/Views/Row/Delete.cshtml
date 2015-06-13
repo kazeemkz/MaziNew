@@ -1,0 +1,34 @@
+﻿@model eLibrary.Model.Row
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h4>DELETE A ROW</h4>
+
+<h3>Are you sure you want to delete this?</h3>
+@using (Html.BeginForm()) {
+<fieldset>
+    <legend>Row Delete</legend>
+
+   @* <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShelfID)
+    </div>*@
+    <div class="display-field">
+        @Html.HiddenFor(model => model.RowID)
+          @Html.HiddenFor(model => model.ShelfID)
+    </div>
+
+    <div class="display-label">
+       
+    </div>
+    <div class="display-field">
+      <b>  @Html.DisplayNameFor(model => model.RowName):</b>  @Html.DisplayFor(model => model.RowName)
+    </div>
+</fieldset>
+
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,144 @@
+﻿
+@model PagedList.IPagedList<eLibrary.Model.Exam>
+@{
+    ViewBag.Title = "List Of Exams";
+}
+
+<h4>LIST OF EXAMS</h4>
+<br />
+<br />
+@Html.ActionLink("Create Questions", "Create", "Question")
+
+@using (Html.BeginForm("LoadExamCodes","Exam"))
+{
+    <fieldset>
+        <legend>Search Box</legend>
+
+        <table>
+            <tr>
+
+                <td>
+                    <b>Exam Code:</b>
+                </td>
+                <td>
+                    @Html.TextBox("ExamCode")
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <b>Class:</b>
+                </td>
+                <td>
+                    @Html.DropDownList("Class", eLibrary.Model.LevelDictionary.LevelDicoList)
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <b>Visible:</b>
+                </td>
+                <td>
+                    @Html.DropDownList("Visible", eLibrary.Model.LevelDictionary.Visible)
+                </td>
+            </tr>
+
+
+        </table>
+        <input type="submit" value="Search" id="button" />
+        <br />
+    </fieldset>
+}
+
+@*@using (Html.BeginForm("Index2", "EXam"))
+{
+    @Html.ValidationSummary(true)
+
+    
+    <div class="editor-field">
+        @Html.DropDownList("examCode", new SelectList((System.Collections.IEnumerable)ViewData["examCode"], "Value", "Text"))
+    </div>
+    
+    <br /> 
+    <input type="submit" value="Click" id="button3" />
+  
+
+}*@
+
+<fieldset>
+    <legend>List of Exams</legend>
+    @if (Model != null)
+    { 
+       
+  
+        <table>
+            <tr>
+                <th>
+                   <b>Exam Code</b>
+                </th>
+                <th>
+                    <b>Class</b>
+                </th>
+                <th>
+                    <b>Visible</b>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExamCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LevelName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Visible)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ExamID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ExamID }) |
+                     @Html.ActionLink("Edit Exam Questions", "Edit", "Question", new { id = item.ExamID }, null)
+                        |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ExamID })
+                    </td>
+                </tr>
+            }
+        </table>
+          <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+        &nbsp;
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "LoadExamCodes", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink("< Prev", "LoadExamCodes", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw("&nbsp;");
+        @:< Prev
+    }
+        &nbsp;
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >","LoadExamCodes", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink(">>", "LoadExamCodes", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw("&nbsp;")
+        @:>>
+    }
+    </div>
+ 
+    }
+</fieldset>

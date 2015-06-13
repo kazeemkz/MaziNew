@@ -1,0 +1,43 @@
+﻿@model eLibrary.Model.Column
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h4>CREATE A COLUMN</h4>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Column</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ColumnName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ColumnName)
+            @Html.ValidationMessageFor(model => model.ColumnName)
+        </div>
+
+       @* <div class="editor-label">
+            @Html.LabelFor(model => model.RowID)
+        </div>*@
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.RowID)
+            @Html.ValidationMessageFor(model => model.RowID)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

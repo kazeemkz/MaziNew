@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>The E-Library Solution</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="background-color: #8fb6e1">
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("Library Management System", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login" >
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+
+                    @*   <ul id="menu">
+                            <li>@Html.ActionLink("Upload Notes", "Create", "UploadLessonNote")</li>
+
+                            <li></li>
+                            <li</li>
+                        </ul>*@
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body" style="background-color: #4f8394">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            @*<div class="float-left">
+                <p>&copy; @DateTime.Now.Year - MyStreams.com </p>
+            </div>
+            <div class="float-right">
+                <ul id="social">
+                    <li><a href="http://facebook.com" class="facebook">Facebook</a></li>
+                    <li><a href="http://twitter.com" class="twitter">Twitter</a></li>
+                </ul>
+            </div>*@
+        </div>
+    </footer>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Content/themes/base/css")
+    @RenderSection("scripts", required: false)
+    <style type="text/css">
+        li.ui-state-default {
+            font-size: 10px;
+        }
+
+        div.ui-tabs-panel {
+            font-size: 15px;
+            font-family: georgia;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        $(":submit").button();
+        $("#tabs").tabs().width("400px");
+    </script>
+
+
+</body>
+</html>

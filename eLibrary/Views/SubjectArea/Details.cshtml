@@ -1,0 +1,22 @@
+﻿@model eLibrary.Model.SubjectArea
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SubjectArea</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TheSubjectArea)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TheSubjectArea)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SubjectAreaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

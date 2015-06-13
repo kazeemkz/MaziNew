@@ -1,0 +1,51 @@
+﻿@model eLibrary.Model.Course
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h4>DELETE CLASS SUBJECT</h4>
+
+<h3>Are you sure you want to delete this?</h3>
+<h3>NOTE THAT CHAPTERS AND ADDITIONAL NOTES BELONGING TO THIS CLASS SUBJECT WILL BE DELETED !</h3>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Delete Class Subject</legend>
+
+@*
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.LevelStringID)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.LevelStringID)
+        </div>
+
+        <div class="display-label">
+            @Html.HiddenFor(model => model.LevelID)
+        </div>*@
+        <div class="display-field">
+            @Html.HiddenFor(model => model.LevelID)
+              @Html.HiddenFor(model => model.CourseID)
+        </div>
+
+        <div class="display-label">
+        
+        </div>
+        <div class="display-field">
+         <b>    @Html.DisplayNameFor(model => model.Name):</b>   @Html.DisplayFor(model => model.Name)
+        </div>
+@*
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.path)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.path)
+        </div>*@
+    </fieldset>
+
+    <p>
+        <input type="submit" value="Delete" />
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

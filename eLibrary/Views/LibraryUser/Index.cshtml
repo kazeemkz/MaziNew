@@ -1,0 +1,176 @@
+﻿@model PagedList.IPagedList<eLibrary.Model.LibraryUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>SEARCH USERS</h4>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Search Box</legend>
+        <table>
+             <tr>
+                <td>User Name:</td>
+                <td>@Html.TextBox("UserName")
+                </td>
+
+            </tr>
+            <tr>
+                <td>User Type:</td>
+                <td>@Html.DropDownList("Type", eLibrary.Model.LevelDictionary.StaffStudentList2)
+                </td>
+
+            </tr>
+            @*<tr>
+                <td>Class:</td>
+                <td>@Html.DropDownList("Level", eLibrary.Model.LevelDictionary.LevelDicoListWithoutChoose)
+                </td>
+            </tr>
+
+            <tr>
+                <td>Arm:</td>
+                <td>@Html.DropDownList("Arm", eLibrary.Model.LevelDictionary.LevelTypeListWithoutChoose)
+                </td>
+            </tr>*@
+
+
+        </table>
+          <input type="submit" value="Search" />
+    </fieldset>  
+
+  
+      
+  
+}
+<fieldset>
+    <legend>@Model.Count() Records Found</legend>
+    <table>
+        <tr>
+            <th>
+                <b>L.Name</b>
+            </th>
+            <th>
+                <b>User Type</b>
+            </th>
+           @* <th>
+                <b>Student Class</b>
+            </th>
+            <th>
+                <b>Arm</b>
+            </th>
+            <th>
+                <b>Teacher Class</b>
+            </th>
+            <th>
+                <b>Arm</b>
+            </th>*@
+
+
+            @*  <th>
+                @Html.DisplayNameFor(model => model.LevelType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassTeacher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LevelTaught)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LevelTaughtType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType)
+                </td>
+              @*  <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LevelType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LevelTaught)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LevelTaughtType)
+                </td>*@
+
+
+
+              @*  <td>
+                    @Html.DisplayFor(modelItem => item.LevelType)
+                </td>*@
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.ClassTeacher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LevelTaught)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LevelTaughtType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserName }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UserName }) |
+         @*   @Html.ActionLink("Delete", "Delete", new { id = item.LibraryUserID })*@
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+        &nbsp;
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw("&nbsp;");
+        @:< Prev
+    }
+        &nbsp;
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw("&nbsp;")
+        @:>>
+    }
+    </div>
+</fieldset>
+  @Html.ActionLink("Back to List","Index", "UserAdministration")

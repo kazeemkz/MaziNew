@@ -1,0 +1,38 @@
+﻿@model IEnumerable<eLibrary.Model.Course>
+@{
+    Layout = null;
+}
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table>
+    <tr>
+        <th>
+           <text>Subject Names</text>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>*@
+            <td>
+                <a href="#">@item.Name</a>
+                @*  @Html.ActionLink(item.Name, "Select", "Course" , new { id = item.CourseID }) *@
+                @*  @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CourseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })*@
+            </td>
+        </tr>
+    }
+</table>
+@section Scripts {
+    <script>
+        $('a').click(function (e) {
+            $("#Chapter").val() = $(this).val();
+        })
+    </script>
+}

@@ -1,0 +1,267 @@
+﻿@model eLibrary.Models.QuestionViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h3>Edit Exam/Test Questions</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    for (int k = 0; k < Model.TheQuestions.Count(); k++)
+    {
+         @Html.HiddenFor(m => Model.TheQuestions[k].QuestionID)
+    @Html.HiddenFor(m => Model.TheQuestions[k].ExamID)
+     @Html.HiddenFor(m => Model.TheQuestions[k].OrderNumber)
+
+
+   
+        <table>
+            <tr>
+                <td>
+                    <b>Question-@Model.TheQuestions[k].OrderNumber</b>
+
+                </td>
+                <td>
+                     <b>Question Text:</b>   @Html.TextAreaFor(m => Model.TheQuestions[k].Text, new { style = "width:500px" }) <b>Question Point:</b>   @Html.TextBoxFor(m => Model.TheQuestions[k].Point, new { style = "width:50px" })
+                 <b>Delete This Question:</b>   @Html.CheckBoxFor(m => Model.TheQuestions[k].Delete)
+            
+      
+        @Html.EditorFor(m => Model.TheQuestions[k].Choices[0], "Choices")
+                 @Html.EditorFor(m => Model.TheQuestions[k].Choices[1], "Choices")
+         @Html.EditorFor(m => Model.TheQuestions[k].Choices[2], "Choices")
+         @Html.EditorFor(m => Model.TheQuestions[k].Choices[3], "Choices")
+         @if (Model.TheQuestions[k].Choices.Count > 4)
+        {
+         @Html.EditorFor(m => Model.TheQuestions[k].Choices[4], "Choices")
+         }
+                </td>
+            </tr>
+        </table>
+       @*  <b>Question Text:</b>   @Html.TextAreaFor(m => Model.TheQuestions[k].Text, new { style = "width:500px" }) <b>Question Point:</b>   @Html.TextBoxFor(m => Model.TheQuestions[k].Point, new { style = "width:50px" })
+        
+        
+
+      
+        @Html.EditorFor(m => Model.TheQuestions[k].Choices[0], "Choices")
+                 @Html.EditorFor(m => Model.TheQuestions[k].Choices[1], "Choices")
+         @Html.EditorFor(m => Model.TheQuestions[k].Choices[2], "Choices")
+         @Html.EditorFor(m => Model.TheQuestions[k].Choices[3], "Choices")
+         @if (Model.TheQuestions[k].Choices.Count > 4)
+        {
+         @Html.EditorFor(m => Model.TheQuestions[k].Choices[4], "Choices")
+         }
+        
+      <br />
+
+        <b>Choice A:</b>   @Html.TextBoxFor(m => Model.TheQuestions[k].Choices[0].Text, new { style = "width:200px" })
+
+
+        <br />
+
+        <b>Choice B:</b>   @Html.TextBoxFor(m => Model.TheQuestions[k].Choices[1].Text, new { style = "width:200px" })
+
+
+        <br />
+
+        <b>Choice C:</b>   @Html.TextBoxFor(m => Model.TheQuestions[k].Choices[2].Text, new { style = "width:200px" })
+        <br />
+
+        <b>Choice D:</b>   @Html.TextBoxFor(m => Model.TheQuestions[k].Choices[3].Text, new { style = "width:200px" })
+
+        <br />
+        @if (Model.TheQuestions[k].Choices.Count > 4)
+        {
+
+            <b>Choice E:</b>   @Html.TextBoxFor(m => Model.TheQuestions[k].Choices[4].Text, new { style = "width:200px" })
+
+            <br />
+        }
+
+
+
+        @*  @Html.RadioButtonFor(Model => Model.Level, "JSS1", new { @checked = "checked" })JSS1
+            @Html.RadioButtonFor(Model => Model.Level, "JSS2")JSS2
+            @Html.RadioButtonFor(Model => Model.Level, "JSS3")JSS3
+            @Html.RadioButtonFor(Model => Model.Level, "SS1")SS1
+            @Html.RadioButtonFor(Model => Model.Level, "SS2")SS2
+            @Html.RadioButtonFor(Model => Model.Level, "SS3")SS3
+
+*@
+
+             @*   <b>The Answer:</b>
+        <div class="editor-field">
+            @if (@Model.TheQuestions[k].Choices[0].IsAnswer == true)
+            {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "A", new { @checked = "checked" });<text>A</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[0].IsAnswer);
+               
+            }
+            else
+            {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "A");<text>A</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[0].IsAnswer);
+             
+            }
+            @if (@Model.TheQuestions[k].Choices[1].IsAnswer == true)
+            {
+                  
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "B", new { @checked = "checked" });<text>B</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[1].IsAnswer);
+            }
+            else
+            {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "B");<text>B</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[1].IsAnswer);
+            }
+            @if (@Model.TheQuestions[k].Choices[2].IsAnswer == true)
+            {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "C", new { @checked = "checked" });<text>C</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[2].IsAnswer);
+            }
+            else
+            {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "C");<text>C</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[2].IsAnswer);
+            }
+            @if (@Model.TheQuestions[k].Choices[3].IsAnswer == true)
+            {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "D", new { @checked = "checked" });<text>D</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[3].IsAnswer);
+            }
+            else
+            {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "D");<text>D</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[3].IsAnswer);
+            }
+            @if (Model.TheQuestions[k].Choices.Count > 4)
+            {
+                if (@Model.TheQuestions[k].Choices[4].IsAnswer == true)
+                {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "E", new { @checked = "checked" });<text>E</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[4].IsAnswer);
+                }
+                else
+                {
+                @Html.RadioButtonFor(m => Model.TheQuestions[k].Choices, "e");<text>E</text>
+                @Html.HiddenFor(m => Model.TheQuestions[k].Choices[4].IsAnswer);
+                }
+            }
+        </div>
+
+    </fieldset>*@
+   
+    }
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+}
+<br />
+@* 
+    @foreach(model in Model)
+    {
+
+        <fieldset>
+            <legend>Question</legend>
+
+            @Html.HiddenFor(model => model.QuestionID)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OrderNumber)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OrderNumber)
+                @Html.ValidationMessageFor(model => model.OrderNumber)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Point)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Point)
+                @Html.ValidationMessageFor(model => model.Point)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Text)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Text)
+                @Html.ValidationMessageFor(model => model.Text)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ExamID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ExamID)
+                @Html.ValidationMessageFor(model => model.ExamID)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Choice1)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Choice1)
+                @Html.ValidationMessageFor(model => model.Choice1)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Choice2)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Choice2)
+                @Html.ValidationMessageFor(model => model.Choice2)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Choice3)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Choice3)
+                @Html.ValidationMessageFor(model => model.Choice3)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Choice4)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Choice4)
+                @Html.ValidationMessageFor(model => model.Choice4)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Choice5)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Choice5)
+                @Html.ValidationMessageFor(model => model.Choice5)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Answer)
+            </div>
+            <div class="editor-field">
+                @Html.RadioButtonFor(model => model.Answer, "A")A
+            @Html.RadioButtonFor(model => model.Answer, "B")B
+            @Html.RadioButtonFor(model => model.Answer, "C")C
+            @Html.RadioButtonFor(model => model.Answer, "D")D
+            @Html.RadioButtonFor(model => model.Answer, "E")E
+            @Html.ValidationMessageFor(model => model.Answer)
+            </div>
+
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    }
+}*@
+
+<div>
+    @Html.ActionLink("Back to List", "LoadExamCodes", "Exam")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

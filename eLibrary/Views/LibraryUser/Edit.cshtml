@@ -1,0 +1,168 @@
+﻿@model eLibrary.Model.LibraryUser
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h4>EDIT LIBRARY USER</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>LibraryUser</legend>
+
+        @Html.HiddenFor(model => model.LibraryUserID)
+          @Html.HiddenFor(model => model.UserName)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+           <b>User Type</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.UserType, eLibrary.Model.LevelDictionary.StaffStudentList2)
+            @Html.ValidationMessageFor(model => model.UserType)
+        </div>
+
+
+
+        <fieldset>
+            <legend><b>Please Fill-Out Section if Intented User is a Student</b></legend>
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.ClassTeacher)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ClassTeacher)
+                @Html.ValidationMessageFor(model => model.ClassTeacher)
+            </div>*@
+            <div class="editor-label">
+               <b>Class</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Level, eLibrary.Model.LevelDictionary.LevelDicoList)
+                @Html.ValidationMessageFor(model => model.Level)
+            </div>
+
+            <div class="editor-label">
+              <b>Arm</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.LevelType, eLibrary.Model.LevelDictionary.LevelTypeList)
+                @Html.ValidationMessageFor(model => model.LevelType)
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend><b>Please Fill-Out Section if Intented User is a Teacher</b></legend>
+            <div class="editor-label">
+               <b>Class Teacher of</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.LevelTaught, eLibrary.Model.LevelDictionary.LevelDicoList)
+                @Html.ValidationMessageFor(model => model.LevelTaught)
+            </div>
+            <div class="editor-label">
+               <b>Arm</b>
+            </div>
+            <div class="editor-field">
+                @*    @Html.EditorFor(model => model.LevelTaughtType)*@
+                @Html.DropDownListFor(model => model.LevelTaughtType, eLibrary.Model.LevelDictionary.LevelTypeList)
+                @Html.ValidationMessageFor(model => model.LevelTaughtType)
+            </div>
+        </fieldset>
+
+
+
+        <div class="editor-label">
+           <b>Date of Birth</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DOB, new { @class = "date" })
+            @Html.ValidationMessageFor(model => model.DOB)
+        </div>
+        <div class="editor-label">
+          <b>Telephone</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TelePhoneNumber)
+            @Html.ValidationMessageFor(model => model.TelePhoneNumber)
+        </div>
+
+        <fieldset>
+        <legend><b>Change User photo</b></legend>
+            @Html.ActionLink("Change Photo","Create", "UserPhoto", new { id = Model.LibraryUserID },null);
+        </fieldset>
+
+        @*  <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+    <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>*@
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            // alert("HI");
+
+            $("#DOB").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'mm/dd/yy',
+                gotoCurrent: true
+            });
+        });
+    </script>
+}

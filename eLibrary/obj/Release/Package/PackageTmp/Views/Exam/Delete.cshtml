@@ -1,0 +1,56 @@
+﻿@model eLibrary.Model.Exam
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h4>Delete</h4>
+
+<h4>Are you sure you want to delete Exam - @Model.ExamCode?</h4>
+@using (Html.BeginForm()) {
+<fieldset>
+    <legend>Exam</legend>
+
+     @Html.HiddenFor(model => model.ExamID)
+    <div class="display-label">
+       
+    </div>
+    <div class="display-field">
+       <b>  @Html.DisplayNameFor(model => model.ExamCode):</b> @Html.DisplayFor(model => model.ExamCode)
+    </div>
+
+    <div class="display-label">
+      
+    </div>
+    <div class="display-field">
+      <b>   @Html.DisplayNameFor(model => model.LevelName):</b>  @Html.DisplayFor(model => model.LevelName)
+    </div>
+
+    <div class="display-label">
+       
+    </div>
+    <div class="display-field">
+      <b>  @Html.DisplayNameFor(model => model.Term):</b>  @Html.DisplayFor(model => model.Term)
+    </div>
+
+    <div class="display-label">
+        
+    </div>
+    <div class="display-field">
+      <b> @Html.DisplayNameFor(model => model.Visible):</b>  @Html.DisplayFor(model => model.Visible)
+    </div>
+
+   
+</fieldset>@*
+
+    
+     
+    @Html.HiddenFor(model => model.ExamCode)
+    @Html.HiddenFor(model => model.LevelName)
+    @Html.HiddenFor(model => model.Term)
+    @Html.HiddenFor(model => model.Visible)
+    *@<p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

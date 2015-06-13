@@ -1,0 +1,60 @@
+﻿@model eLibrary.Model.Exam
+
+<script src="~/Scripts/jquery-1.6.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@*@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Exam</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExamCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ExamCode)
+            @Html.ValidationMessageFor(model => model.ExamCode)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}*@
+
+
+<script>
+
+    $("#CreateCourseDialog").dialog({
+
+        autoOpen: false,
+        resizable: false,
+        width: 600,
+        title: "Create Subject",
+        modal: true,
+
+        open: function (event, ui) {
+
+            $(this).load('@Url.Action("CreatePartial", "Course")');
+
+        },
+        buttons: {
+
+            "Cancel": function () {
+                $(this).dialog("close");
+            }
+
+        }
+    });
+
+    $("#CreateSubject")
+    .button()
+    .click(function (e) {
+        //theLevelVal = $("#Level").val();
+        $("#CreateCourseDialog").dialog("open");
+        e.preventDefault();
+
+    });
+</script>

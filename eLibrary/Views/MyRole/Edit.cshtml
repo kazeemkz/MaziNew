@@ -1,0 +1,218 @@
+﻿@model eLibrary.Model.MyRole
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h3>EDIT ROLE ACTIVITIES</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Edit Activites for Role - <b>@Model.RoleName </b> </legend>
+
+        @Html.HiddenFor(model => model.MyRoleID)
+
+       @* <div class="editor-label">
+            @Html.LabelFor(model => model.RoleName)
+        </div>*@
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.RoleName)
+            @Html.ValidationMessageFor(model => model.RoleName)
+        </div>
+
+
+
+
+        <fieldset>
+        <legend>Edit Activites for Upload</legend>
+         <table style="width: 100%">
+                <tr>
+                    @{
+    int cnt = 0;
+    List<eLibrary.Models.ActivityData> StudentA = ViewBag.Upload;
+
+    foreach (var student in StudentA)
+    {
+        if (cnt++ % 3 == 0)
+        {
+                                @:  </tr> <tr> 
+                            }
+                            @: <td> 
+                                <input type="checkbox" 
+                                       name="selectedCourses" 
+                                       value="@student.Name"+ "Subject" 
+                                       @(Html.Raw(student.Assigned ? "checked=\"checked\"" : "")) /> 
+                                @student.Name @:&nbsp;@* @student.Name*@
+                            @:</td>
+                        }
+                        @: </tr>
+                    }
+            </table>
+
+            </fieldset>
+
+
+         <fieldset>
+        <legend>Edit Activites for Additing Class Subjects(Courses)</legend>
+         <table style="width: 100%">
+                <tr>
+                    @{
+    int cntcourse = 0;
+    List<eLibrary.Models.ActivityData> theCourse = ViewBag.Course;
+
+    foreach (var student in theCourse)
+    {
+        if (cntcourse++ % 3 == 0)
+        {
+                                @:  </tr> <tr> 
+                            }
+                            @: <td> 
+                                <input type="checkbox" 
+                                       name="selectedCourses" 
+                                       value="@student.Name"+ "Subject" 
+                                       @(Html.Raw(student.Assigned ? "checked=\"checked\"" : "")) /> 
+                                @student.Name @:&nbsp;@* @student.Name*@
+                            @:</td>
+                        }
+                        @: </tr>
+                    }
+            </table>
+
+            </fieldset>
+
+        <fieldset>
+            <legend>Edit Activites for Exam</legend>
+         <table style="width: 100%">
+                <tr>
+                    @{
+    int cntt = 0;
+    List<eLibrary.Models.ActivityData> subject = ViewBag.Exam;
+
+    foreach (var course in subject)
+    {
+        if (cntt++ % 3 == 0)
+        {
+                                @:  </tr> <tr> 
+                            }
+                            @: <td> 
+                                <input type="checkbox" 
+                                       name="selectedCourses" 
+                                       value="@course.Name" + "Subject"
+                                       @(Html.Raw(course.Assigned ? "checked=\"checked\"" : "")) /> 
+                                @course.Name @:&nbsp; @*@course.Name*@
+                            @:</td>
+                        }
+                        @: </tr>
+                    }
+            </table>
+        </fieldset>
+         <fieldset>
+            <legend>Edit Activites for Book</legend>
+         <table style="width: 100%">
+                <tr>
+                    @{
+    int cnexam = 0;
+    List<eLibrary.Models.ActivityData> staff = ViewBag.Book;
+
+    foreach (var course in staff)
+    {
+        if (cnexam++ % 3 == 0)
+        {
+                                @:  </tr> <tr> 
+                            }
+                            @: <td> 
+                                <input type="checkbox" 
+                                       name="selectedCourses" 
+                                       value="@course.Name" + "Subject"
+                                       @(Html.Raw(course.Assigned ? "checked=\"checked\"" : "")) /> 
+                                @course.Name @:&nbsp; @*@course.Name*@
+                            @:</td>
+                        }
+                        @: </tr>
+                    }
+            </table>
+        </fieldset>
+        
+         <fieldset>
+            <legend>Edit Activites for BorrowedItem</legend>
+         <table style="width: 100%">
+                <tr>
+                    @{
+    int storecounter = 0;
+    List<eLibrary.Models.ActivityData> store = ViewBag.BorrowedItem;
+
+    foreach (var course in store)
+    {
+        if (storecounter++ % 3 == 0)
+        {
+                                @:  </tr> <tr> 
+                            }
+                            @: <td> 
+                                <input type="checkbox" 
+                                       name="selectedCourses" 
+                                       value="@course.Name" + "Subject"
+                                       @(Html.Raw(course.Assigned ? "checked=\"checked\"" : "")) /> 
+                                @course.Name @:&nbsp; @*@course.Name*@
+                            @:</td>
+                        }
+                        @: </tr>
+                    }
+            </table>
+        </fieldset>
+
+        
+
+
+        <fieldset>
+            <legend>Edit Activites for Shelf</legend>
+         <table style="width: 100%">
+                <tr>
+                    @{
+    int shelf = 0;
+    List<eLibrary.Models.ActivityData> theBook = ViewBag.Shelf;
+
+    foreach (var course in theBook)
+    {
+        if (shelf++ % 3 == 0)
+        {
+                                @:  </tr> <tr> 
+                            }
+                            @: <td> 
+                                <input type="checkbox" 
+                                       name="selectedCourses" 
+                                       value="@course.Name" + "Subject"
+                                       @(Html.Raw(course.Assigned ? "checked=\"checked\"" : "")) /> 
+                                @course.Name @:&nbsp; @*@course.Name*@
+                            @:</td>
+                        }
+                        @: </tr>
+                    }
+            </table>
+        </fieldset>
+        
+        
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "UserAdministration")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+
+    $("#button2").button();
+
+    $("#tabs").tabs().width("750px");
+    $("#tabs1").tabs().width("750px");
+    $("#accordion").accordion().width("235px");
+</script>
+}

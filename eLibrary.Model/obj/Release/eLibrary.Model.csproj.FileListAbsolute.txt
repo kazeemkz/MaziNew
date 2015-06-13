@@ -1,0 +1,10 @@
+C:\Project\E-Library\eLibrary\eLibrary.Model\bin\Release\eLibrary.Model.dll
+C:\Project\E-Library\eLibrary\eLibrary.Model\bin\Release\eLibrary.Model.pdb
+C:\Project\E-Library\eLibrary\eLibrary.Model\obj\Release\eLibrary.Model.csprojResolveAssemblyReference.cache
+C:\Project\E-Library\eLibrary\eLibrary.Model\obj\Release\eLibrary.Model.dll
+C:\Project\E-Library\eLibrary\eLibrary.Model\obj\Release\eLibrary.Model.pdb
+C:\Project\E-Library\elibraryApp\eLibrary.Model\bin\Release\eLibrary.Model.dll
+C:\Project\E-Library\elibraryApp\eLibrary.Model\bin\Release\eLibrary.Model.pdb
+C:\Project\E-Library\elibraryApp\eLibrary.Model\obj\Release\eLibrary.Model.csprojResolveAssemblyReference.cache
+C:\Project\E-Library\elibraryApp\eLibrary.Model\obj\Release\eLibrary.Model.dll
+C:\Project\E-Library\elibraryApp\eLibrary.Model\obj\Release\eLibrary.Model.pdb

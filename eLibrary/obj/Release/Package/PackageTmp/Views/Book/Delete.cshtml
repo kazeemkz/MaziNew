@@ -1,0 +1,71 @@
+﻿@model eLibrary.Model.Book
+@{
+    ViewBag.Title = "Delete an Item";
+}
+
+<h4>DELETE AN ITEM</h4>
+
+@using (Html.BeginForm())
+{
+    <h3>Are you sure you want to delete this?</h3>
+    <fieldset>
+        <legend>Book Delete</legend>
+
+
+        <div class="display-label">
+        </div>
+        <div class="display-field">
+            <b>@Html.DisplayNameFor(model => model.ItemTitle):</b>  @Html.DisplayFor(model => model.ItemTitle)
+        </div>
+
+        <div class="display-label">
+        </div>
+        <div class="display-field">
+            <b>@Html.DisplayNameFor(model => model.Aurthors):</b>    @Html.DisplayFor(model => model.Aurthors)
+        </div>
+
+
+        <div class="display-label">
+        </div>
+        <div class="display-field">
+            <b>@Html.DisplayNameFor(model => model.ItemType):</b> @Html.DisplayFor(model => model.ItemType)
+        </div>
+
+        @* <div class="display-label">
+        @Html.DisplayNameFor(model => model.PageNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PageNumber)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ISBN)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ISBN)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DiskNumbers)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DiskNumbers)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ColumnID)
+    </div>
+    *@<div class="display-field">
+        @Html.HiddenFor(model => model.ColumnID)
+        @Html.HiddenFor(model => model.Column.Row.RowID)
+        @Html.HiddenFor(model => model.BookID)
+    </div>
+    </fieldset>
+
+
+    <p>
+        <input type="submit" value="Delete" />
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
